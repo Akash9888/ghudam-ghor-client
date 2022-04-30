@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./navbar.css";
 
 const NavBar = () => {
     return (
@@ -31,7 +32,7 @@ const NavBar = () => {
                         </button>
 
                         <div
-                            className="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                            className="hidden  z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
                             id="dropdown"
                             // style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(1054.4px, 970.4px, 0px);"
                             style={{
