@@ -1,10 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebaseConfig";
 import "./navbar.css";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+import { useAlert } from "react-alert";
 const NavBar = () => {
-    console.log(auth?.currentUser);
-    console.log(auth?.currentUser?.photoURL);
+    const [user, loading] = useAuthState(auth);
+    const alert = useAlert();
+
+    console.log(user);
+
+    const navigate = useNavigate();
+    const logout = () => {
+        signOut(auth);
+        alert.info("Log out successfully");
+        navigate("/");
+    };
     return (
         <div>
             <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
@@ -21,11 +32,12 @@ const NavBar = () => {
                     </div>
 
                     <div className="flex items-center md:order-2">
-                        {auth?.currentUser ? (
+                        {user ? (
                             <>
                                 <button
                                     type="button"
-                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    onClick={logout}>
                                     Log Out
                                 </button>
                                 {/* user photo */}
@@ -40,7 +52,11 @@ const NavBar = () => {
                                     </span>
                                     <img
                                         className="w-8 h-8 rounded-full"
-                                        src={auth?.currentUser?.photoURL}
+                                        src={
+                                            user.photoURL
+                                                ? user.photoURL
+                                                : "user.png"
+                                        }
                                         alt="user photo"
                                     />
                                 </button>
@@ -65,10 +81,10 @@ const NavBar = () => {
                                     data-popper-placement="top">
                                     <div className="py-3 px-4">
                                         <span className="block text-sm text-gray-900 dark:text-white">
-                                            Bonnie Green
+                                            {user.displayName}
                                         </span>
                                         <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-                                            name@flowbite.com
+                                            {user.email}
                                         </span>
                                     </div>
                                     <ul
@@ -109,12 +125,18 @@ const NavBar = () => {
                             <div>
                                 <button
                                     type="button"
-                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    onClick={() => {
+                                        navigate("/login");
+                                    }}>
                                     Login
                                 </button>
                                 <button
                                     type="button"
-                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    onClick={() => {
+                                        navigate("/signup");
+                                    }}>
                                     Sign Up
                                 </button>
                             </div>
@@ -161,27 +183,35 @@ const NavBar = () => {
                                     Home
                                 </Link>
                             </li>
-                            <li>
-                                <Link
-                                    to="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                                    Manage Items
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                                    Add Items
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                                    My Items
-                                </Link>
-                            </li>
+
+                            {user ? (
+                                <>
+                                    <li>
+                                        <Link
+                                            to="manage-items"
+                                            className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                            Manage Items
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="add-items"
+                                            className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                            Add Items
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="my-items"
+                                            className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                            My Items
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <></>
+                            )}
+
                             <li>
                                 <Link
                                     to="blog"
