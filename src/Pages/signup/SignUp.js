@@ -1,14 +1,13 @@
 import React, { useRef } from "react";
 import { useAlert } from "react-alert";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebaseConfig";
 
 const SignUp = () => {
     const emailRef = useRef("");
     const passRef = useRef("");
     const navigate = useNavigate();
-    const location = useLocation();
     const alert = useAlert();
     const [createUserWithEmailAndPassword, user, loading, error] =
         useCreateUserWithEmailAndPassword(auth, {
