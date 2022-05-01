@@ -3,6 +3,8 @@ import NavBar from "./Components/navbar/NavBar";
 import Blog from "./Pages/blog/Blog";
 import Home from "./Pages/home/Home";
 import FourZeroFour from "./Pages/error/FourZeroFour";
+import Login from "./Pages/login/Login";
+import SignUp from "./Pages/signup/SignUp";
 
 function App() {
     return (
@@ -12,6 +14,8 @@ function App() {
                 <Route path="/">
                     <Route index element={<Home />} />
                     <Route path="blog" element={<Blog />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="signup" element={<SignUp />} />
                 </Route>
                 <Route path="*" element={<FourZeroFour />} />
             </Routes>

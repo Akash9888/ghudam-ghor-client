@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import auth from "../../firebaseConfig";
 import "./navbar.css";
 
 const NavBar = () => {
+    console.log(auth?.currentUser);
+    console.log(auth?.currentUser?.photoURL);
     return (
         <div>
             <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
@@ -16,78 +19,107 @@ const NavBar = () => {
                             GudamGhor
                         </span>
                     </div>
+
                     <div className="flex items-center md:order-2">
-                        <button
-                            type="button"
-                            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            id="user-menu-button"
-                            aria-expanded="false"
-                            data-dropdown-toggle="dropdown">
-                            <span className="sr-only">Open user menu</span>
-                            <img
-                                className="w-8 h-8 rounded-full"
-                                src="/docs/images/people/profile-picture-3.jpg"
-                                alt="user photo"
-                            />
-                        </button>
+                        {auth?.currentUser ? (
+                            <>
+                                <button
+                                    type="button"
+                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    Log Out
+                                </button>
+                                {/* user photo */}
+                                <button
+                                    type="button"
+                                    className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                    id="user-menu-button"
+                                    aria-expanded="false"
+                                    data-dropdown-toggle="dropdown">
+                                    <span className="sr-only">
+                                        Open user menu
+                                    </span>
+                                    <img
+                                        className="w-8 h-8 rounded-full"
+                                        src={auth?.currentUser?.photoURL}
+                                        alt="user photo"
+                                    />
+                                </button>
+                                {/* user dashboard */}
+                                <div
+                                    className="hidden  z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
+                                    id="dropdown"
+                                    // style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(1054.4px, 970.4px, 0px);"
+                                    style={{
+                                        position: "absolute",
+                                        inset: "auto auto 0px 0px",
+                                        margin: "0px",
+                                        // transform: translate3d(
+                                        //  1054.4px, 970.4px, 0px
+                                        // )",
 
-                        <div
-                            className="hidden  z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
-                            id="dropdown"
-                            // style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(1054.4px, 970.4px, 0px);"
-                            style={{
-                                position: "absolute",
-                                inset: "auto auto 0px 0px",
-                                margin: "0px",
-                                // transform: translate3d(
-                                //  1054.4px, 970.4px, 0px
-                                // )",
-
-                                transform:
-                                    "translate3d( 1054.4px, 970.4px, 0px)",
-                            }}
-                            data-popper-reference-hidden=""
-                            data-popper-escaped=""
-                            data-popper-placement="top">
-                            <div className="py-3 px-4">
-                                <span className="block text-sm text-gray-900 dark:text-white">
-                                    Bonnie Green
-                                </span>
-                                <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-                                    name@flowbite.com
-                                </span>
+                                        transform:
+                                            "translate3d( 1054.4px, 970.4px, 0px)",
+                                    }}
+                                    data-popper-reference-hidden=""
+                                    data-popper-escaped=""
+                                    data-popper-placement="top">
+                                    <div className="py-3 px-4">
+                                        <span className="block text-sm text-gray-900 dark:text-white">
+                                            Bonnie Green
+                                        </span>
+                                        <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+                                            name@flowbite.com
+                                        </span>
+                                    </div>
+                                    <ul
+                                        className="py-1"
+                                        aria-labelledby="dropdown">
+                                        <li>
+                                            <Link
+                                                to="#"
+                                                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                Dashboard
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to="#"
+                                                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                Settings
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to="#"
+                                                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                Earnings
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to="#"
+                                                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                Sign out
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </>
+                        ) : (
+                            <div>
+                                <button
+                                    type="button"
+                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    Login
+                                </button>
+                                <button
+                                    type="button"
+                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    Sign Up
+                                </button>
                             </div>
-                            <ul className="py-1" aria-labelledby="dropdown">
-                                <li>
-                                    <Link
-                                        to="#"
-                                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                        Dashboard
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        to="#"
-                                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                        Settings
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        to="#"
-                                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                        Earnings
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        to="#"
-                                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                        Sign out
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+                        )}
+
                         <button
                             data-collapse-toggle="mobile-menu-2"
                             type="button"
