@@ -4,17 +4,25 @@ import "./navbar.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useAlert } from "react-alert";
+import { useState } from "react";
+
 const NavBar = () => {
     const [user, loading] = useAuthState(auth);
     const alert = useAlert();
-
-    console.log(user);
 
     const navigate = useNavigate();
     const logout = () => {
         signOut(auth);
         alert.info("Log out successfully");
         navigate("/");
+    };
+    const [openMenue, setOpenMenue] = useState(false);
+    const [openProfile, setOpenProfile] = useState(false);
+    const mobileMenue = () => {
+        setOpenMenue(!openMenue);
+    };
+    const showProfile = () => {
+        setOpenProfile(!openProfile);
     };
     return (
         <div>
@@ -31,7 +39,7 @@ const NavBar = () => {
                         </span>
                     </div>
 
-                    <div className="flex items-center md:order-2">
+                    <div className="relative flex items-center md:order-2">
                         {user ? (
                             <>
                                 <button
@@ -40,13 +48,16 @@ const NavBar = () => {
                                     onClick={logout}>
                                     Log Out
                                 </button>
-                                {/* user photo */}
+
                                 <button
                                     type="button"
                                     className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                     id="user-menu-button"
                                     aria-expanded="false"
-                                    data-dropdown-toggle="dropdown">
+                                    data-dropdown-toggle="dropdown"
+                                    onClick={() => {
+                                        showProfile();
+                                    }}>
                                     <span className="sr-only">
                                         Open user menu
                                     </span>
@@ -60,22 +71,22 @@ const NavBar = () => {
                                         alt="user photo"
                                     />
                                 </button>
-                                {/* user dashboard */}
-                                <div
-                                    className="hidden  z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
-                                    id="dropdown"
-                                    // style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(1054.4px, 970.4px, 0px);"
-                                    style={{
-                                        position: "absolute",
-                                        inset: "auto auto 0px 0px",
-                                        margin: "0px",
-                                        // transform: translate3d(
-                                        //  1054.4px, 970.4px, 0px
-                                        // )",
 
-                                        transform:
-                                            "translate3d( 1054.4px, 970.4px, 0px)",
-                                    }}
+                                <div
+                                    className={
+                                        openProfile
+                                            ? "z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
+                                            : "hidden  z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
+                                    }
+                                    id="dropdown"
+                                    // style={{
+                                    //     position: "absolute",
+                                    //     inset: "auto auto 0px 0px",
+                                    //     margin: "0px",
+
+                                    //     transform:
+                                    //         "translate3d( 1054.4px, 970.4px, 0px)",
+                                    // }}
                                     data-popper-reference-hidden=""
                                     data-popper-escaped=""
                                     data-popper-placement="top">
@@ -147,10 +158,15 @@ const NavBar = () => {
                             type="button"
                             className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             aria-controls="mobile-menu-2"
-                            aria-expanded="false">
+                            aria-expanded="false"
+                            onClick={() => {
+                                mobileMenue();
+                            }}>
                             <span className="sr-only">Open main menu</span>
                             <svg
-                                className="w-6 h-6"
+                                className={
+                                    openMenue ? "hidden w-6 h-6" : "w-6 h-6"
+                                }
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +176,9 @@ const NavBar = () => {
                                     clipRule="evenodd"></path>
                             </svg>
                             <svg
-                                className="hidden w-6 h-6"
+                                className={
+                                    openMenue ? "w-6 h-6" : "hidden w-6 h-6"
+                                }
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +190,11 @@ const NavBar = () => {
                         </button>
                     </div>
                     <div
-                        className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
+                        className={
+                            openMenue
+                                ? "justify-between items-center w-full md:flex md:w-auto md:order-1"
+                                : "hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
+                        }
                         id="mobile-menu-2">
                         <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                             <li>

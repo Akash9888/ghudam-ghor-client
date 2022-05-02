@@ -33,6 +33,7 @@ function App() {
     return (
         <div className="App">
             <NavBar />
+            {/* <Example /> */}
             <Routes>
                 <Route path="/">
                     <Route index element={<Home />} />
