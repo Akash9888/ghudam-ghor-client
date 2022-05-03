@@ -1,17 +1,5 @@
 [
     {
-        "productName": "Pusti Maida - 2KG",
-        "picture": "https://pusti.com.bd/wp-content/uploads/2016/05/Moida-2-KG-Single.jpg",
-        "description": "Pure Maida is extracted from 100% wheat.",
-        "price": "92",
-        "quantity": 324,
-
-        "supplier": "Pusti",
-        "email": "akash.tuhsar98@gmail.com"
-    },
-    {
-        "_id": "626e9dfcde58e1582772dbe7",
-        "index": 1,
         "productName": "Pusti Soyabean Oil - 5L",
         "picture": "https://pusti.com.bd/wp-content/uploads/2018/11/Soyabean-Oil-600x921.jpg",
         "description": "PUSTI Soyabean Oil is a flagship premium brand in soyabean oil market of Bangladesh.",
@@ -21,8 +9,6 @@
         "email": "akash.tuhsar98@gmail.com"
     },
     {
-        "_id": "626e9dfcb9ab31c7e118a07b",
-        "index": 2,
         "productName": "Pusti Best Leaf Tea - 500g",
         "picture": "https://pusti.com.bd/wp-content/uploads/2016/05/Best-Leaf-500g-Single-800x1268.jpg",
         "description": "Pusti Tea comes in six different blends – Best Leaf/ BOP/ Gold/ Dust/ CD.",
@@ -32,8 +18,6 @@
         "email": "akash.tuhsar98@gmail.com"
     },
     {
-        "_id": "626e9dfc98833948baf9d363",
-        "index": 3,
         "productName": "Bisk Club Shero Biscuit - 85gm",
         "picture": "https://www.pranfoods.net/sites/default/files/field/image/shero_01.143edited.png",
         "description": "Experience heavenly delight with Bisk Club Shero Cream Biscuit. Each biscuit is made with a perfectly balanced creamy fillings.",
@@ -43,45 +27,11 @@
         "email": "akash.tuhsar98@gmail.com"
     },
     {
-        "_id": "626e9dfc8e1e4f7a36facf4c",
-        "index": 4,
         "productName": "Bisk Club Champion Chocolate Coated Biscuit",
         "picture": "https://www.pranfoods.net/sites/default/files/field/image/champion_biscuit.png",
         "description": "Et fugiat incididunt cupidatat eiusmod occaecat ex. Dolor irure Lorem pariatur magna Lorem irure ea. Aliquip labore ipsum consequat laborum cillum sint reprehenderit voluptate. Ex velit commodo nostrud occaecat aliqua enim aute eiusmod nisi ea aliquip officia. Qui ipsum aliqua irure minim pariatur. Veniam in sit incididunt incididunt culpa minim deserunt irure reprehenderit exercitation.\r\n",
         "price": "15",
         "quantity": 334,
-        "supplier": "Pran",
-        "email": "akash.tuhsar98@gmail.com"
-    },
-    {
-        "_id": "626e9dfc42cf2e8b4392a026",
-        "index": 5,
-        "productName": "Catalina Briggs",
-        "picture": "http://placehold.it/32x32",
-        "description": "Do velit deserunt qui adipisicing qui culpa ea culpa qui quis esse. Culpa nisi esse dolor nulla ad sint commodo magna laboris elit. Amet ut sit amet et incididunt. Laborum incididunt non pariatur aliquip tempor ullamco ad deserunt in aliquip minim. Irure duis eu est ex excepteur. Esse ex quis ea duis nisi ad nostrud excepteur ut. Voluptate et excepteur sint qui.\r\n",
-        "price": 901.52,
-        "quantity": 36,
-        "email": "akash.tuhsar98@gmail.com"
-    },
-    {
-        "_id": "626e9dfc801135e8a5087d71",
-        "index": 6,
-        "productName": "All Time Honeycomb Mixed Fruits",
-        "picture": "https://www.pranfoods.net/sites/default/files/field/image/5-product-image-honeycomb-750x750px-min.png",
-        "description": "Mouth watering fruit Mix with honey covered bread to fill up your instant hunger.",
-        "price": "20",
-        "quantity": 248,
-        "supplier": "Pran",
-        "email": "akash.tuhsar98@gmail.com"
-    },
-    {
-        "_id": "626e9dfc5bf59ce942cab8b3",
-        "index": 7,
-        "productName": "Tango Drink",
-        "picture": "https://www.pranfoods.net/sites/default/files/field/image/tango_bottle_01.png",
-        "description": "Velit deserunt commodo proident cupidatat eu aliqua dolor ullamco duis nulla dolor anim duis ea. Consequat deserunt commodo voluptate ut qui tempor laborum. Non cupidatat mollit Lorem nulla excepteur ex irure irure ea qui ex. Magna sunt est aliquip reprehenderit officia ipsum officia aliqua proident sint et pariatur in.\r\n",
-        "price": "35",
-        "quantity": 3000,
         "supplier": "Pran",
         "email": "akash.tuhsar98@gmail.com"
     }
