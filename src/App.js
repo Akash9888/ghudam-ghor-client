@@ -12,6 +12,7 @@ import MyItems from "./Pages/items/MyItems";
 import auth from "./firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loader from "./Components/loader/Loader";
+import SingleInventory from "./Pages/inventory/SingleInventory";
 
 function App() {
     function RequireAuth({ children }) {
@@ -41,6 +42,14 @@ function App() {
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="reset" element={<PasswordReset />} />
+                    <Route
+                        path="inventory/:id"
+                        element={
+                            <RequireAuth>
+                                <SingleInventory />
+                            </RequireAuth>
+                        }
+                    />
                     <Route
                         path="add-items"
                         element={

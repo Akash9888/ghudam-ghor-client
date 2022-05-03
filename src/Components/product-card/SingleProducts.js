@@ -1,22 +1,28 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const SingleProducts = (props) => {
+    const navigate = useNavigate();
     console.log(props.item);
     const {
-        picture,
+       photo,
         productName,
         description,
         price,
         quantity,
-
+_id,
         supplier,
     } = props.item;
+    const inventoryPage=(_id) => {
+        console.log("uD");
+        navigate(`/inventory/${_id}`);
+    }
     return (
         <div>
             <div class="flex flex-col items-center text-center bg-white rounded-lg border shadow-md md:h-[320px] overflow-hidden md:flex-row md:max-w-xl md:text-left hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                 <img
                     class="object-contain w-[100%] h-[150px] rounded-t-lg md:h-70 md:w-40 md:rounded-none md:rounded-l-lg"
-                    src={picture}
+                    src={photo}
                     alt=""
                 />
                 <div class="flex flex-col justify-between p-4  leading-normal">
@@ -47,7 +53,10 @@ const SingleProducts = (props) => {
                         </span>
                     </h1>
                     <div class="flex justify-center items-center">
-                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() =>{
+                            inventoryPage(_id);
+                           
+                        }}>
                             Update Stock
                         </button>
                     </div>

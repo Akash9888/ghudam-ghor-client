@@ -3,34 +3,24 @@ import ItemsTableBody from "../../Components/itemsTableBody/ItemsTableBody";
 import auth from "../../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loader from "../../Components/loader/Loader";
+import useFetch from "../../CustomHook/useFetch";
 
 const MyItems = () => {
-    const [user, loading, error] = useAuthState(auth);
-    console.log(loading);
-    const [showLoader, setShowLoader] = useState(true);
-    const [myItems, setMyItems] = useState([]);
-    const axios = require("axios");
+    const [user] = useAuthState(auth);
+    const {
+        data: myItems,
+        loading,
+        error,
+    } = useFetch(`http://localhost:5000/api/products/filter/${user?.email}`);
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:5000/api/products/filter/${user?.email}`)
-            .then(function (response) {
-                setMyItems(response.data);
-                console.log(myItems);
-                setShowLoader(!showLoader);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .then(function () {
-                // always executed
-            });
-    }, []);
+    if (loading) {
+        return <Loader />;
+    }
+
     return (
         <div>
             <h1 className="text-center p-5">My Items</h1>
-            {showLoader && <Loader />}
+
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
