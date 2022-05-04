@@ -1,32 +1,40 @@
-import React, { useEffect, useState } from "react";
+import { useAlert } from "react-alert";
 import ItemsTableBody from "../../Components/itemsTableBody/ItemsTableBody";
 import Loader from "../../Components/loader/Loader";
+import useDelete from "../../CustomHooks/useDelete";
+import useFetch from "../../CustomHooks/useFetch";
 
 const ManageItems = () => {
-    const [showLoader, setShowLoader] = useState(true);
-    const [items, seItems] = useState([]);
-    const axios = require("axios");
+    const alert = useAlert();
+    const {
+        data: items,
+        loading,
+        error,
+        reFetch,
+    } = useFetch(`http://localhost:5000/api/products/fetch`);
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:5000/api/products/fetch`)
-            .then(function (response) {
-                seItems(response.data);
-                console.log(items);
-                setShowLoader(!showLoader);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .then(function () {
-                // always executed
-            });
-    }, []);
+    const { deleteRequest } = useDelete();
+    const deleteProduct = async (_id) => {
+        const conf = window.confirm("Are you sure you want to delete?");
+        if (conf) {
+            console.log("deleteProduct");
+            await deleteRequest(
+                `http://localhost:5000/api/products/delete/${_id}`
+            );
+            await reFetch();
+        }
+    };
+
+    if (loading) {
+        return <Loader />;
+    }
+    if (error) {
+        alert.error(error.message);
+    }
     return (
         <div>
             <h1 className="text-center p-5">Manage items</h1>
-            {showLoader && <Loader />}
+
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -62,7 +70,11 @@ const ManageItems = () => {
                     <tbody>
                         {items?.map((item) => {
                             return (
-                                <ItemsTableBody key={item._id} item={item} />
+                                <ItemsTableBody
+                                    key={item._id}
+                                    item={item}
+                                    deleteProduct={deleteProduct}
+                                />
                             );
                         })}
                     </tbody>

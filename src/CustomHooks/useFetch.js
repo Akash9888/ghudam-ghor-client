@@ -14,8 +14,16 @@ const useFetch = (url) => {
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
     }, [url]);
+    const reFetch = () => {
+        console.log("reFetch");
+        axios
+            .get(url)
+            .then((response) => setData(response.data))
+            .catch((error) => setError(error))
+            .finally(() => setLoading(false));
+    };
 
-    return { loading, data, error };
+    return { loading, data, error, reFetch };
 };
 
 export default useFetch;

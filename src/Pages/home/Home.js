@@ -1,27 +1,23 @@
 import { useEffect, useState } from "react";
+import { useAlert } from "react-alert";
 import Loader from "../../Components/loader/Loader";
 import SingleProducts from "../../Components/product-card/SingleProducts";
+import useFetch from "../../CustomHooks/useFetch";
 
 const Home = () => {
-    const [items, setItems] = useState([]);
-    const [showLoader, setShowLoader] = useState(true);
-    const axios = require("axios");
-    useEffect(() => {
-        axios
-            .get(`http://localhost:5000/api/products/fetch`)
-            .then(function (response) {
-                setItems(response.data);
-                console.log(response.data);
-                setShowLoader(!showLoader);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .then(function () {
-                // always executed
-            });
-    }, []);
+    const {
+        data: items,
+        loading,
+        error,
+    } = useFetch(`http://localhost:5000/api/products/fetch`);
+    const alert = useAlert();
+
+    if (loading) {
+        return <Loader />;
+    }
+    if (error) {
+        alert.error(error.message);
+    }
 
     return (
         <div>
@@ -104,9 +100,9 @@ const Home = () => {
             </div>
             <div className="container mx-auto p-6">
                 <h1 className="text-center text-xl py-4">Inventory Items</h1>
-                {showLoader && <Loader />}
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                    {items.map((item) => {
+                    {items?.map((item) => {
                         return <SingleProducts key={item._id} item={item} />;
                     })}
                 </div>

@@ -3,18 +3,38 @@ import ItemsTableBody from "../../Components/itemsTableBody/ItemsTableBody";
 import auth from "../../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loader from "../../Components/loader/Loader";
-import useFetch from "../../CustomHook/useFetch";
+import useFetch from "../../CustomHooks/useFetch";
+import { useAlert } from "react-alert";
+import useDelete from "../../CustomHooks/useDelete";
 
 const MyItems = () => {
+    console.log("MY items");
+    const alert = useAlert();
     const [user] = useAuthState(auth);
     const {
         data: myItems,
         loading,
         error,
+        reFetch,
     } = useFetch(`http://localhost:5000/api/products/filter/${user?.email}`);
+    const { deleteRequest } = useDelete();
+
+    const deleteProduct = async (_id) => {
+        const conf = window.confirm("Are you sure you want to delete?");
+        if (conf) {
+            console.log("deleteProduct");
+            await deleteRequest(
+                `http://localhost:5000/api/products/delete/${_id}`
+            );
+            await reFetch();
+        }
+    };
 
     if (loading) {
         return <Loader />;
+    }
+    if (error) {
+        alert.error(error.message);
     }
 
     return (
@@ -56,7 +76,11 @@ const MyItems = () => {
                     <tbody>
                         {myItems?.map((item) => {
                             return (
-                                <ItemsTableBody key={item._id} item={item} />
+                                <ItemsTableBody
+                                    key={item._id}
+                                    item={item}
+                                    deleteProduct={deleteProduct}
+                                />
                             );
                         })}
                     </tbody>
