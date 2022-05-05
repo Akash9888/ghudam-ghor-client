@@ -9,7 +9,13 @@ const useDelete = () => {
     const deleteRequest = (url) => {
         setLoading(true);
         axios
-            .delete(url)
+            .delete(url, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            })
             .then((response) => {
                 setData(response);
             })

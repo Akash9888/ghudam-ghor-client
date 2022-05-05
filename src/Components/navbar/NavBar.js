@@ -40,7 +40,7 @@ const NavBar = () => {
                     </div>
 
                     <div className="relative flex items-center md:order-2">
-                        {user ? (
+                        {user?.emailVerified ? (
                             <>
                                 <button
                                     type="button"
@@ -206,7 +206,7 @@ const NavBar = () => {
                                 </Link>
                             </li>
 
-                            {user ? (
+                            {user?.emailVerified ? (
                                 <>
                                     <li>
                                         <Link

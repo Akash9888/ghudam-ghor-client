@@ -3,42 +3,56 @@ import { useAlert } from "react-alert";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "../../Components/loader/Loader";
+import useToken from "../../CustomHooks/useToken";
 import auth from "../../firebaseConfig";
-
+import axios from "axios";
 import GoogleLogin from "./GoogleLogin";
 
 const Login = () => {
     const [signInWithEmailAndPassword, user, loading, error] =
         useSignInWithEmailAndPassword(auth);
+
+    // const { getToken, data, loading: newLoading, error: newError } = useToken();
     const alert = useAlert();
     const navigate = useNavigate();
     const location = useLocation();
     const emailRef = useRef("");
     const passRef = useRef("");
     let from = location.state?.from?.pathname || "/";
+
+    const getToken = async (email) => {
+        const { data } = await axios.post(
+            `http://localhost:5000/api/users/createuser`,
+            { email }
+        );
+
+        localStorage.setItem("accessToken", data);
+
+        alert.success("User login successfully");
+
+        navigate(from, { replace: true });
+    };
     if (error) {
         alert.error(error.message);
     }
     if (loading) {
         <Loader />;
     }
+
     if (user) {
-        if (user) {
-            if (!user?.user?.emailVerified) {
-                alert.info("Please verify your email first then try agin");
-            } else {
-                alert.success("User login successfully");
-                navigate(from, { replace: true });
-            }
+        if (!user?.user?.emailVerified) {
+            alert.info("Please verify your email first then try agin");
+        } else {
+            getToken(user?.user?.email);
         }
     }
-    const login = (e) => {
+
+    const login = async (e) => {
         e.preventDefault();
-        console.log(emailRef.current.value, passRef.current.value);
-        signInWithEmailAndPassword(
-            emailRef.current.value,
-            passRef.current.value
-        );
+        const email = emailRef.current.value;
+        const pass = passRef.current.value;
+
+        await signInWithEmailAndPassword(email, pass);
     };
     return (
         <div>

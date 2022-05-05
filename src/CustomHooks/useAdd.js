@@ -1,15 +1,15 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
-const useUpdate = () => {
+const useAdd = (url, product) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
 
-    const update = (url, product) => {
+    useEffect(() => {
         setLoading(true);
         axios
-            .put(url, update, {
+            .post(url, update, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem(
                         "accessToken"
@@ -19,18 +19,9 @@ const useUpdate = () => {
             .then((response) => setData(response.data))
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
-    };
+    }, [url]);
 
-    // useEffect(() => {
-    //     setLoading(true);
-    //     axios
-    //         .get(url)
-    //         .then((response) => setLoading(response.data))
-    //         .catch((error) => setError(error))
-    //         .finally(() => setLoading(false));
-    // }, [url]);
-
-    return { data, loading, error, update };
+    return { loading, data, error };
 };
 
-export default useUpdate;
+export default useAdd;

@@ -8,8 +8,15 @@ const useFetch = (url) => {
 
     useEffect(() => {
         setLoading(true);
+
         axios
-            .get(url)
+            .get(url, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            })
             .then((response) => setData(response.data))
             .catch((error) => setError(error))
             .finally(() => setLoading(false));

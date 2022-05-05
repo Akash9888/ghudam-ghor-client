@@ -6,6 +6,7 @@ import Loader from "../../Components/loader/Loader";
 import useFetch from "../../CustomHooks/useFetch";
 import { useAlert } from "react-alert";
 import useDelete from "../../CustomHooks/useDelete";
+import Pagination from "../../Components/pagination/Pagination";
 
 const MyItems = () => {
     console.log("MY items");
@@ -38,53 +39,58 @@ const MyItems = () => {
     }
 
     return (
-        <div>
+        <div className="container mx-auto  w-full  p-6 ">
             <h1 className="text-center p-5">My Items</h1>
 
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Product ID
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Product name
-                            </th>
+            <div className="mx-auto">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-center text-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Product ID
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Product name
+                                </th>
 
-                            <th scope="col" class="px-6 py-3">
-                                description
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Supplier
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Quantity
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Price (unit)
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Email
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                {/* <span class="sr-only">Edit</span> */}
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {myItems?.map((item) => {
-                            return (
-                                <ItemsTableBody
-                                    key={item._id}
-                                    item={item}
-                                    deleteProduct={deleteProduct}
-                                />
-                            );
-                        })}
-                    </tbody>
-                </table>
+                                <th scope="col" class="px-6 py-3">
+                                    description
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Supplier
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Quantity
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Price (unit)
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Email
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    {/* <span class="sr-only">Edit</span> */}
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {myItems?.map((item) => {
+                                return (
+                                    <ItemsTableBody
+                                        key={item._id}
+                                        item={item}
+                                        deleteProduct={deleteProduct}
+                                    />
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="p-6">
+                    <Pagination />
+                </div>
             </div>
         </div>
     );

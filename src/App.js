@@ -37,7 +37,15 @@ function App() {
             {/* <Example /> */}
             <Routes>
                 <Route path="/">
-                    <Route index element={<Home />} />
+                    <Route
+                        index
+                        element={
+                            <RequireAuth>
+                                <Home />
+                            </RequireAuth>
+                        }
+                    />
+                    {/* <Route index element={<Home />} /> */}
                     <Route path="blog" element={<Blog />} />
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />

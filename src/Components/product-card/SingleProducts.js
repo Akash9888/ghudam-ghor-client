@@ -11,7 +11,7 @@ const SingleProducts = (props) => {
     };
     return (
         <div>
-            <div class="flex flex-col items-center text-center bg-white rounded-lg border shadow-md md:h-[320px] overflow-hidden md:flex-row md:max-w-xl md:text-left hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            {/* <div class="flex flex-col items-center text-center bg-white rounded-lg border shadow-md md:h-[320px] overflow-hidden md:flex-row md:max-w-xl md:text-left hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                 <img
                     class="object-contain w-[100%] h-[150px] rounded-t-lg md:h-70 md:w-40 md:rounded-none md:rounded-l-lg"
                     src={photo}
@@ -53,6 +53,23 @@ const SingleProducts = (props) => {
                             Update Stock
                         </button>
                     </div>
+                </div>
+            </div> */}
+            <div className="text-center  drop-shadow-lg">
+                <div>
+                    <img
+                        className="object-contain w-full h-[250px]"
+                        src={photo}
+                        alt="product"
+                    />
+                    <h1> {productName}</h1>
+                    <p> {description}</p>
+                    <h6>Quantity: {quantity}</h6>
+                    <h6>Price: {price}</h6>
+                    <h6>Supplier: {supplier}</h6>
+                    <button className="text-white font-semibold w-full h-[40px] uppercase bg-red-500">
+                        Update Stock
+                    </button>
                 </div>
             </div>
         </div>
