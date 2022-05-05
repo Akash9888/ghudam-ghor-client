@@ -1,15 +1,17 @@
 import ReactPaginate from "react-paginate";
+import useCount from "../../CustomHooks/useCount";
 
-const Pagination = () => {
-    const handlePageClick = () => {
-        console.log("click page");
-    };
+const Pagination = ({ handlePageClick }) => {
+    const { pageCount } = useCount(
+        `http://localhost:5000/api/products/fetch/count`
+    );
+    console.log("pageCount: " + pageCount);
     return (
         <ReactPaginate
             previousLabel={"previous"}
             nextLabel={"next"}
             breakLabel={"..."}
-            pageCount={10}
+            pageCount={pageCount}
             marginPagesDisplayed={2}
             pageRangeDisplayed={3}
             onPageChange={handlePageClick}

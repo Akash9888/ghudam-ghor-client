@@ -17,8 +17,11 @@ const MyItems = () => {
         loading,
         error,
         reFetch,
+        page,
     } = useFetch(`http://localhost:5000/api/products/filter/${user?.email}`);
     const { deleteRequest } = useDelete();
+
+    // console.log("page count: " + pageCount);
 
     const deleteProduct = async (_id) => {
         const conf = window.confirm("Are you sure you want to delete?");
@@ -29,6 +32,9 @@ const MyItems = () => {
             );
             await reFetch();
         }
+    };
+    const handlePageClick = () => {
+        console.log("click page");
     };
 
     if (loading) {
@@ -89,7 +95,7 @@ const MyItems = () => {
                     </table>
                 </div>
                 <div className="p-6">
-                    <Pagination />
+                    <Pagination handlePageClick={handlePageClick} />
                 </div>
             </div>
         </div>

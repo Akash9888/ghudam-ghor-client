@@ -1,18 +1,32 @@
+import { useState } from "react";
 import { useAlert } from "react-alert";
 import ItemsTableBody from "../../Components/itemsTableBody/ItemsTableBody";
 import Loader from "../../Components/loader/Loader";
+import Pagination from "../../Components/pagination/Pagination";
+import useCount from "../../CustomHooks/useCount";
 import useDelete from "../../CustomHooks/useDelete";
 import useFetch from "../../CustomHooks/useFetch";
 
 const ManageItems = () => {
     const alert = useAlert();
+
+    const [size, setSize] = useState(10);
+    const [curPage, setCurPage] = useState(1);
+
     const {
         data: items,
         loading,
         error,
         reFetch,
-    } = useFetch(`http://localhost:5000/api/products/fetch`);
+    } = useFetch(
+        `http://localhost:5000/api/products/fetch?page=${curPage}&size=${size}`
+    );
 
+    const handlePageClick = (data) => {
+        let cur = data.selected + 1;
+        setCurPage(cur);
+        console.log(cur);
+    };
     const { deleteRequest } = useDelete();
     const deleteProduct = async (_id) => {
         const conf = window.confirm("Are you sure you want to delete?");
@@ -79,6 +93,9 @@ const ManageItems = () => {
                         })}
                     </tbody>
                 </table>
+            </div>
+            <div className="p-6">
+                <Pagination handlePageClick={handlePageClick} />
             </div>
         </div>
     );
