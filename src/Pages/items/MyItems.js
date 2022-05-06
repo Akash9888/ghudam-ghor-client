@@ -46,7 +46,9 @@ const MyItems = () => {
 
     return (
         <div className="container mx-auto  w-full  p-6 ">
-            <h1 className="text-center p-5">My Items</h1>
+            <h1 className="text-center text-2xl font-bold mt-2 m-5">
+                My Items
+            </h1>
 
             <div className="mx-auto">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

@@ -7,6 +7,7 @@ import useFetch from "../../CustomHooks/useFetch";
 import axios from "axios";
 import HomeCarousel from "./HomeCarousel";
 import HomeProducts from "./HomeProducts";
+import HomeChart from "./HomeChart";
 
 const Home = () => {
     const [loading, setLoading] = useState(false);
@@ -40,7 +41,7 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <div className="bg-red-200">
             {loading ? (
                 <Loader />
             ) : (
@@ -59,6 +60,7 @@ const Home = () => {
                             })}
                         </div>
                     </div>
+                    <HomeChart />
                 </>
             )}
         </div>

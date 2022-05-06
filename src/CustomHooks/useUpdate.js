@@ -6,10 +6,11 @@ const useUpdate = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const update = (url, product) => {
+    const update = (url, item) => {
+        console.log("^^^^");
         setLoading(true);
         axios
-            .put(url, update, {
+            .put(url, item, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem(
                         "accessToken"
@@ -20,15 +21,6 @@ const useUpdate = () => {
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
     };
-
-    // useEffect(() => {
-    //     setLoading(true);
-    //     axios
-    //         .get(url)
-    //         .then((response) => setLoading(response.data))
-    //         .catch((error) => setError(error))
-    //         .finally(() => setLoading(false));
-    // }, [url]);
 
     return { data, loading, error, update };
 };

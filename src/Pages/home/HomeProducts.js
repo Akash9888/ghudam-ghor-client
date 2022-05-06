@@ -7,10 +7,11 @@ const HomeProducts = (props) => {
     const { photo, productName, description, price, quantity, _id, supplier } =
         props.item;
     const inventoryPage = (_id) => {
-        navigate(`/inventory/${_id}`);
+        navigate(`/inventory-item/${_id}`);
+        // navigate(`/inventory/${_id}`);
     };
     return (
-        <div class="container">
+        <div className="container">
             <div className=" border-solid border-2 drop-shadow-md text-center">
                 <img
                     style={{
@@ -20,9 +21,9 @@ const HomeProducts = (props) => {
                     src={photo}
                     alt=""
                 />
-                <div class="">
-                    <div class="row">
-                        <div class="card-title">
+                <div className="">
+                    <div className="row">
+                        <div className="card-title">
                             <h4 className="text-lg font-medium mt-2">
                                 {productName}
                             </h4>

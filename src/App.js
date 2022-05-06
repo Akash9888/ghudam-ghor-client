@@ -6,7 +6,7 @@ import FourZeroFour from "./Pages/error/FourZeroFour";
 import Login from "./Pages/login/Login";
 import SignUp from "./Pages/signup/SignUp";
 import PasswordReset from "./Pages/password-reset/PasswordReset";
-import AddItems from "./Pages/items/AddItems";
+import AddItem from "./Pages/items/AddItem";
 import ManageItems from "./Pages/items/ManageItems";
 import MyItems from "./Pages/items/MyItems";
 import auth from "./firebaseConfig";
@@ -14,6 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loader from "./Components/loader/Loader";
 import SingleInventory from "./Pages/inventory/SingleInventory";
 import Footer from "./Components/footer/Footer";
+import InventoryItem from "./Pages/items/InventoryItem";
 
 function App() {
     function RequireAuth({ children }) {
@@ -52,6 +53,14 @@ function App() {
                     <Route path="signup" element={<SignUp />} />
                     <Route path="reset" element={<PasswordReset />} />
                     <Route
+                        path="inventory-item/:id"
+                        element={
+                            <RequireAuth>
+                                <InventoryItem />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
                         path="inventory/:id"
                         element={
                             <RequireAuth>
@@ -60,10 +69,10 @@ function App() {
                         }
                     />
                     <Route
-                        path="add-items"
+                        path="add-item"
                         element={
                             <RequireAuth>
-                                <AddItems />
+                                <AddItem />
                             </RequireAuth>
                         }
                     />

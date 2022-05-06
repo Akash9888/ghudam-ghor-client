@@ -8,7 +8,7 @@ import useUpdate from "../../CustomHooks/useUpdate";
 const SingleInventory = () => {
     let params = useParams();
     const alert = useAlert();
-    console.log(params);
+    console.log("*********");
 
     const {
         data: item,

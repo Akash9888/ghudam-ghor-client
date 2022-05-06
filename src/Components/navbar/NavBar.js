@@ -223,13 +223,13 @@ const NavBar = () => {
                                     </li>
                                     <li>
                                         <NavLink
-                                            to="/add-items"
+                                            to="/add-item"
                                             className={({ isActive }) =>
                                                 isActive
                                                     ? "mr-4 text-lime-500 font-bold md:mr-6"
                                                     : "mr-4 hover:underline md:mr-6"
                                             }>
-                                            Add Items
+                                            Add Item
                                         </NavLink>
                                     </li>
                                     <li>
