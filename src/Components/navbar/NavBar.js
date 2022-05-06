@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import auth from "../../firebaseConfig";
 import "./navbar.css";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -26,7 +26,7 @@ const NavBar = () => {
     };
     return (
         <div>
-            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+            <nav className="bg-teal-800 text-white border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-800">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <div className="flex items-center">
                         <img
@@ -196,51 +196,68 @@ const NavBar = () => {
                                 : "hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
                         }
                         id="mobile-menu-2">
-                        <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                            <li>
-                                <Link
-                                    to="/"
-                                    className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                                    aria-current="page">
-                                    Home
-                                </Link>
-                            </li>
-
+                        <ul className="flex flex-col mt-4 text-center md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                             {user?.emailVerified ? (
                                 <>
                                     <li>
-                                        <Link
-                                            to="manage-items"
-                                            className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                        <NavLink
+                                            to="/"
+                                            className={({ isActive }) =>
+                                                isActive
+                                                    ? "mr-4 text-lime-500 font-bold md:mr-6"
+                                                    : "mr-4 hover:underline md:mr-6"
+                                            }>
+                                            Home
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/manage-items"
+                                            className={({ isActive }) =>
+                                                isActive
+                                                    ? "mr-4 text-lime-500 font-bold md:mr-6"
+                                                    : "mr-4 hover:underline md:mr-6"
+                                            }>
                                             Manage Items
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link
-                                            to="add-items"
-                                            className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                        <NavLink
+                                            to="/add-items"
+                                            className={({ isActive }) =>
+                                                isActive
+                                                    ? "mr-4 text-lime-500 font-bold md:mr-6"
+                                                    : "mr-4 hover:underline md:mr-6"
+                                            }>
                                             Add Items
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link
-                                            to="my-items"
-                                            className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                        <NavLink
+                                            to="/my-items"
+                                            className={({ isActive }) =>
+                                                isActive
+                                                    ? "mr-4 text-lime-500 font-bold md:mr-6"
+                                                    : "mr-4 hover:underline md:mr-6"
+                                            }>
                                             My Items
-                                        </Link>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/blogs"
+                                            className={({ isActive }) =>
+                                                isActive
+                                                    ? "mr-4 text-lime-500 font-bold md:mr-6"
+                                                    : "mr-4 hover:underline md:mr-6"
+                                            }>
+                                            Blogs
+                                        </NavLink>
                                     </li>
                                 </>
                             ) : (
                                 <></>
                             )}
-
-                            <li>
-                                <Link
-                                    to="blog"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                                    Blog
-                                </Link>
-                            </li>
                         </ul>
                     </div>
                 </div>

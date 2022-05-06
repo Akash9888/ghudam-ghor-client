@@ -23,7 +23,7 @@ const HomeCarousel = () => {
                     data={data}
                     time={5000}
                     width="100%"
-                    height="80vh"
+                    height="90vh"
                     radius="5px"
                     captionPosition="bottom"
                     automatic={true}
@@ -37,7 +37,7 @@ const HomeCarousel = () => {
                     style={{
                         textAlign: "center",
                         maxWidth: "100%",
-                        maxHeight: "80vh",
+                        maxHeight: "90vh",
                         margin: "0 auto",
                     }}
                 />

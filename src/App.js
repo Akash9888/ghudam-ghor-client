@@ -13,6 +13,7 @@ import auth from "./firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loader from "./Components/loader/Loader";
 import SingleInventory from "./Pages/inventory/SingleInventory";
+import Footer from "./Components/footer/Footer";
 
 function App() {
     function RequireAuth({ children }) {
@@ -85,6 +86,7 @@ function App() {
                 </Route>
                 <Route path="*" element={<FourZeroFour />} />
             </Routes>
+            <Footer />
         </div>
     );
 }

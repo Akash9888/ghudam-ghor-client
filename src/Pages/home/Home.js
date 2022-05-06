@@ -6,6 +6,7 @@ import SingleProducts from "../../Components/product-card/SingleProducts";
 import useFetch from "../../CustomHooks/useFetch";
 import axios from "axios";
 import HomeCarousel from "./HomeCarousel";
+import HomeProducts from "./HomeProducts";
 
 const Home = () => {
     const [loading, setLoading] = useState(false);
@@ -46,17 +47,14 @@ const Home = () => {
                 <>
                     <HomeCarousel />
                     <div className="container mx-auto p-6">
-                        <h1 className="text-center text-xl py-4">
+                        <h1 className="text-center text-2xl font-bold m-5">
                             Inventory Items
                         </h1>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                             {items?.map((item) => {
                                 return (
-                                    <SingleProducts
-                                        key={item._id}
-                                        item={item}
-                                    />
+                                    <HomeProducts key={item._id} item={item} />
                                 );
                             })}
                         </div>
