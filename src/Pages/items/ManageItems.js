@@ -1,21 +1,13 @@
-import { useState } from "react";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ItemsTableBody from "../../Components/itemsTableBody/ItemsTableBody";
 import Loader from "../../Components/loader/Loader";
-import Pagination from "../../Components/pagination/Pagination";
-import useCount from "../../CustomHooks/useCount";
+
 import useDelete from "../../CustomHooks/useDelete";
 import useFetch from "../../CustomHooks/useFetch";
 import Swal from "sweetalert2";
 const ManageItems = () => {
-    console.log("---manage items---");
     const alert = useAlert();
-
-    const navigate = useNavigate();
-
-    const [size, setSize] = useState(10);
-    const [curPage, setCurPage] = useState(1);
 
     const {
         data: items,
@@ -23,14 +15,9 @@ const ManageItems = () => {
         error,
         reFetch,
     } = useFetch(
-        `http://localhost:5000/api/products/fetch?page=${curPage}&size=${size}`
+        `https://fierce-forest-36458.herokuapp.com/api/products/fetch`
     );
 
-    const handlePageClick = (data) => {
-        let cur = data.selected + 1;
-        setCurPage(cur);
-        console.log(cur);
-    };
     const { deleteRequest, loading: loading2, error: error2 } = useDelete();
     const deleteProduct = async (_id) => {
         Swal.fire({
@@ -43,9 +30,8 @@ const ManageItems = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log("deleteProduct");
                 deleteRequest(
-                    `http://localhost:5000/api/products/delete/${_id}`
+                    `https://fierce-forest-36458.herokuapp.com/api/products/delete/${_id}`
                 );
                 Swal.fire(
                     "Deleted!",
@@ -53,22 +39,10 @@ const ManageItems = () => {
                     "success"
                 );
                 reFetch(
-                    `http://localhost:5000/api/products/fetch?page=${curPage}&size=${size}`
+                    `https://fierce-forest-36458.herokuapp.com/api/products/fetch`
                 );
-                console.log("2222222");
             }
         });
-
-        // const conf = window.confirm("Are you sure you want to delete?");
-        // if (conf) {
-        //     console.log("deleteProduct");
-        //     deleteRequest(`http://localhost:5000/api/products/delete/${_id}`);
-        //     console.log("111");
-        //     reFetch(
-        //         `http://localhost:5000/api/products/fetch?page=${curPage}&size=${size}`
-        //     );
-        //     console.log("2222222");
-        // }
     };
 
     if (loading || loading2) {
@@ -131,17 +105,11 @@ const ManageItems = () => {
                     </tbody>
                 </table>
             </div>
-            <div className="p-6">
-                <Pagination handlePageClick={handlePageClick} />
-            </div>
-            <div className="text-center">
-                <button
-                    className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
-                    onClick={() => {
-                        navigate("/add-item");
-                    }}>
+
+            <div className="text-center mt-5">
+                <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
                     <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                        Add Product
+                        <Link to="/add-item"> Add Item</Link>
                     </span>
                 </button>
             </div>

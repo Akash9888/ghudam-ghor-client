@@ -3,7 +3,7 @@ import { useAlert } from "react-alert";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loader from "../../Components/loader/Loader";
-import useToken from "../../CustomHooks/useToken";
+
 import auth from "../../firebaseConfig";
 import axios from "axios";
 import GoogleLogin from "./GoogleLogin";
@@ -11,7 +11,6 @@ const Login = () => {
     const [signInWithEmailAndPassword, user, loading, error] =
         useSignInWithEmailAndPassword(auth);
 
-    // const { getToken, data, loading: newLoading, error: newError } = useToken();
     const alert = useAlert();
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,7 +21,7 @@ const Login = () => {
 
     const getToken = async (email) => {
         const { data } = await axios.post(
-            `http://localhost:5000/api/users/createuser`,
+            `https://fierce-forest-36458.herokuapp.com/api/users/createuser`,
             { email }
         );
 
@@ -75,7 +74,7 @@ const Login = () => {
                                 id="email"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="example@gmail.com"
-                                required="true"
+                                required={true}
                             />
                         </div>
                         <div className="mt-2">
@@ -91,7 +90,7 @@ const Login = () => {
                                 ref={passRef}
                                 placeholder="••••••••"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                required="true"
+                                required={true}
                             />
                         </div>
                         <div className="  mt-2 flex items-start">

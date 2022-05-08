@@ -12,7 +12,7 @@ import MyItems from "./Pages/items/MyItems";
 import auth from "./firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loader from "./Components/loader/Loader";
-import SingleInventory from "./Pages/inventory/SingleInventory";
+
 import Footer from "./Components/footer/Footer";
 import InventoryItem from "./Pages/items/InventoryItem";
 
@@ -36,7 +36,7 @@ function App() {
     return (
         <div className="App">
             <NavBar />
-            {/* <Example /> */}
+
             <Routes>
                 <Route path="/">
                     <Route
@@ -48,7 +48,7 @@ function App() {
                         }
                     />
                     {/* <Route index element={<Home />} /> */}
-                    <Route path="blog" element={<Blog />} />
+                    <Route path="blogs" element={<Blog />} />
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="reset" element={<PasswordReset />} />
@@ -60,14 +60,7 @@ function App() {
                             </RequireAuth>
                         }
                     />
-                    <Route
-                        path="inventory/:id"
-                        element={
-                            <RequireAuth>
-                                <SingleInventory />
-                            </RequireAuth>
-                        }
-                    />
+
                     <Route
                         path="add-item"
                         element={

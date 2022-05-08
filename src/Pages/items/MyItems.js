@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import ItemsTableBody from "../../Components/itemsTableBody/ItemsTableBody";
 import auth from "../../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -6,10 +5,8 @@ import Loader from "../../Components/loader/Loader";
 import useFetch from "../../CustomHooks/useFetch";
 import { useAlert } from "react-alert";
 import useDelete from "../../CustomHooks/useDelete";
-import Pagination from "../../Components/pagination/Pagination";
-
+import Swal from "sweetalert2";
 const MyItems = () => {
-    console.log("MY items");
     const alert = useAlert();
     const [user] = useAuthState(auth);
     const {
@@ -18,23 +15,34 @@ const MyItems = () => {
         error,
         reFetch,
         page,
-    } = useFetch(`http://localhost:5000/api/products/filter/${user?.email}`);
+    } = useFetch(
+        `https://fierce-forest-36458.herokuapp.com/api/products/filter/${user?.email}`
+    );
     const { deleteRequest } = useDelete();
-
-    // console.log("page count: " + pageCount);
-
     const deleteProduct = async (_id) => {
-        const conf = window.confirm("Are you sure you want to delete?");
-        if (conf) {
-            console.log("deleteProduct");
-            await deleteRequest(
-                `http://localhost:5000/api/products/delete/${_id}`
-            );
-            await reFetch();
-        }
-    };
-    const handlePageClick = () => {
-        console.log("click page");
+        Swal.fire({
+            title: "Are you sure delete this product?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteRequest(
+                    `https://fierce-forest-36458.herokuapp.com/api/products/delete/${_id}`
+                );
+                Swal.fire(
+                    "Deleted!",
+                    "Your product has been deleted.",
+                    "success"
+                );
+                reFetch(
+                    `https://fierce-forest-36458.herokuapp.com/api/products/fetch`
+                );
+            }
+        });
     };
 
     if (loading) {
@@ -51,34 +59,34 @@ const MyItems = () => {
             </h1>
 
             <div className="mx-auto">
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-center text-gray-700 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full text-sm text-center text-gray-700 dark:text-gray-400">
+                        <thead className="text-xs text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                     Product ID
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                     Product name
                                 </th>
 
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                     description
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                     Supplier
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                     Quantity
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                     Price (unit)
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3">
                                     Email
                                 </th>
-                                <th scope="col" class="px-6 py-3">
-                                    {/* <span class="sr-only">Edit</span> */}
+                                <th scope="col" className="px-6 py-3">
+                                    {/* <span  className="sr-only">Edit</span> */}
                                     Action
                                 </th>
                             </tr>
@@ -95,9 +103,6 @@ const MyItems = () => {
                             })}
                         </tbody>
                     </table>
-                </div>
-                <div className="p-6">
-                    <Pagination handlePageClick={handlePageClick} />
                 </div>
             </div>
         </div>

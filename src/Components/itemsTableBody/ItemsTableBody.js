@@ -1,5 +1,4 @@
 import React from "react";
-import useDelete from "../../CustomHooks/useDelete";
 
 const ItemsTableBody = (props) => {
     const {
@@ -14,25 +13,25 @@ const ItemsTableBody = (props) => {
     } = props.item;
 
     return (
-        <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-slate-200 even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
+        <tr className="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-slate-200 even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
             <th
                 scope="row"
-                class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                 {_id}
             </th>
-            <td class="px-6 py-4"> {productName}</td>
-            <td class="px-6 py-4">{description}</td>
-            <td class="px-6 py-4">{supplier}</td>
-            <td class="px-6 py-4">{quantity}</td>
-            <td class="px-6 py-4"> ৳{price}</td>
-            <td class="px-6 py-4">{email}</td>
-            <td class="px-6 py-4">
+            <td className="px-6 py-4"> {productName}</td>
+            <td className="px-6 py-4">{description}</td>
+            <td className="px-6 py-4">{supplier}</td>
+            <td className="px-6 py-4">{quantity}</td>
+            <td className="px-6 py-4"> ৳{price}</td>
+            <td className="px-6 py-4">{email}</td>
+            <td className="px-6 py-4">
                 <button
-                    class="relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+                    className="relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
                     onClick={() => {
                         props.deleteProduct(_id);
                     }}>
-                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Delete
                     </span>
                 </button>

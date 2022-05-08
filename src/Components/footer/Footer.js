@@ -1,7 +1,15 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Footer = () => {
+    const location = useLocation();
+    if (
+        location.pathname === "/login" ||
+        location.pathname === "/signup" ||
+        location.pathname === "/reset"
+    ) {
+        return;
+    }
     return (
         <div>
             <footer className="container mx-auto p-4 bg-teal-800  shadow md:px-6 md:py-8 dark:bg-gray-800">

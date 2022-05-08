@@ -14,7 +14,7 @@ const GoogleLogin = () => {
     let from = location.state?.from?.pathname || "/";
     const getToken = async (email) => {
         const { data } = await axios.post(
-            `http://localhost:5000/api/users/createuser`,
+            `https://fierce-forest-36458.herokuapp.com/api/users/createuser`,
             { email }
         );
 

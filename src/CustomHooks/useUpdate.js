@@ -7,7 +7,6 @@ const useUpdate = () => {
     const [error, setError] = useState(null);
 
     const update = (url, item) => {
-        console.log("^^^^");
         setLoading(true);
         axios
             .put(url, item, {

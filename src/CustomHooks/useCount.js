@@ -26,23 +26,6 @@ const useCount = (url) => {
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
     }, [url]);
-    // const reCount = () => {
-    //     axios
-    //         .get(url, {
-    //             headers: {
-    //                 authorization: `Bearer ${localStorage.getItem(
-    //                     "accessToken"
-    //                 )}`,
-    //             },
-    //         })
-    //         .then((response) => {
-    //             const count = response.data;
-    //             const pages = Math.ceil(count / 10);
-    //             setPage(pages);
-    //         })
-    //         .catch((error) => setError(error))
-    //         .finally(() => setLoading(false));
-    // };
 
     return { pageCount };
 };

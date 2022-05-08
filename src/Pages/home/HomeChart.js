@@ -16,7 +16,7 @@ const HomeChart = () => {
     const alert = useAlert();
 
     const { data, loading, error } = useFetch(
-        `http://localhost:5000/api/products/fetch`
+        `https://fierce-forest-36458.herokuapp.com/api/products/fetch`
     );
     if (error) {
         alert.error(error.message);
@@ -27,7 +27,7 @@ const HomeChart = () => {
     return (
         <div style={{ width: "100%" }}>
             <h1 className="text-center text-2xl font-bold m-5">
-                Product Graph
+                Product Stock Graph
             </h1>
             <ResponsiveContainer width="100%" height={400}>
                 <LineChart
