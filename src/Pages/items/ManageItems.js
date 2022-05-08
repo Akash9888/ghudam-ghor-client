@@ -7,7 +7,7 @@ import Pagination from "../../Components/pagination/Pagination";
 import useCount from "../../CustomHooks/useCount";
 import useDelete from "../../CustomHooks/useDelete";
 import useFetch from "../../CustomHooks/useFetch";
-
+import Swal from "sweetalert2";
 const ManageItems = () => {
     console.log("---manage items---");
     const alert = useAlert();
@@ -33,16 +33,42 @@ const ManageItems = () => {
     };
     const { deleteRequest, loading: loading2, error: error2 } = useDelete();
     const deleteProduct = async (_id) => {
-        const conf = window.confirm("Are you sure you want to delete?");
-        if (conf) {
-            console.log("deleteProduct");
-            deleteRequest(`http://localhost:5000/api/products/delete/${_id}`);
-            console.log("111");
-            reFetch(
-                `http://localhost:5000/api/products/fetch?page=${curPage}&size=${size}`
-            );
-            console.log("2222222");
-        }
+        Swal.fire({
+            title: "Are you sure delete this product?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("deleteProduct");
+                deleteRequest(
+                    `http://localhost:5000/api/products/delete/${_id}`
+                );
+                Swal.fire(
+                    "Deleted!",
+                    "Your product has been deleted.",
+                    "success"
+                );
+                reFetch(
+                    `http://localhost:5000/api/products/fetch?page=${curPage}&size=${size}`
+                );
+                console.log("2222222");
+            }
+        });
+
+        // const conf = window.confirm("Are you sure you want to delete?");
+        // if (conf) {
+        //     console.log("deleteProduct");
+        //     deleteRequest(`http://localhost:5000/api/products/delete/${_id}`);
+        //     console.log("111");
+        //     reFetch(
+        //         `http://localhost:5000/api/products/fetch?page=${curPage}&size=${size}`
+        //     );
+        //     console.log("2222222");
+        // }
     };
 
     if (loading || loading2) {

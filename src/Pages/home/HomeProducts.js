@@ -12,7 +12,7 @@ const HomeProducts = (props) => {
     };
     return (
         <div className="container">
-            <div className=" border-solid border-2 drop-shadow-md text-center">
+            <div className=" rounded-lg border shadow-md text-center">
                 <img
                     style={{
                         width: "100%",

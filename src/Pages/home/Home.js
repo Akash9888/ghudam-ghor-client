@@ -14,7 +14,6 @@ const Home = () => {
     const [items, setItems] = useState(null);
     const [error, setError] = useState(null);
 
-    console.log(localStorage.getItem("accessToken"));
     const alert = useAlert();
 
     useEffect(() => {
@@ -41,7 +40,7 @@ const Home = () => {
     }
 
     return (
-        <div className="bg-red-200">
+        <div>
             {loading ? (
                 <Loader />
             ) : (

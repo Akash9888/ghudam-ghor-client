@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useAlert } from "react-alert";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../Components/loader/Loader";
 import auth from "../../firebaseConfig";
 
@@ -24,38 +24,47 @@ const PasswordReset = () => {
         navigate("/login");
     };
     return (
-        <div>
-            <form onSubmit={reset}>
-                <div class="mb-6">
-                    <label
-                        for="email"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                        Your email
-                    </label>
-                    <input
-                        type="email"
-                        ref={emailRef}
-                        id="email"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="name@flowbite.com"
-                        required="true"
-                    />
+        <div className=" container mx-auto w-full   md:w-[60%]  p-2">
+            <div className="flex justify-center item-center my-10">
+                <div className="flex-1 p-4 max-w-sm md:max-w-[400px] bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
+                    <form className="" onSubmit={reset}>
+                        <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+                            Reset Password
+                        </h5>
+                        <div className="mt-2">
+                            <label
+                                for="email"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                Your email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                ref={emailRef}
+                                id="email"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="example@gmail.com"
+                                required="true"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full mt-2.5 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                            Sent Link
+                        </button>
+
+                        <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
+                            Remember Password?{" "}
+                            <Link
+                                to="/login"
+                                className="text-blue-700 hover:underline dark:text-blue-500">
+                                Login
+                            </Link>
+                        </div>
+                    </form>
                 </div>
-
-                <button
-                    type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Send Link
-                </button>
-
-                <button
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => {
-                        navigate("/login");
-                    }}>
-                    log in
-                </button>
-            </form>
+            </div>
         </div>
     );
 };

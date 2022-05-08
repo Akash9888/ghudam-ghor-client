@@ -9,7 +9,6 @@ const useFetch = (url) => {
 
     useEffect(() => {
         setLoading(true);
-        console.log(url);
 
         axios
             .get(url, {
@@ -21,13 +20,11 @@ const useFetch = (url) => {
             })
             .then((response) => {
                 setData(response.data);
-                console.log(response.data);
             })
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
     }, [url]);
     const reFetch = () => {
-        console.log("reFetch");
         axios
             .get(url, {
                 headers: {

@@ -1,6 +1,6 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebaseConfig";
-import "./navbar.css";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useAlert } from "react-alert";
@@ -11,19 +11,21 @@ const NavBar = () => {
     const alert = useAlert();
 
     const navigate = useNavigate();
+    const location = useLocation();
+
     const logout = () => {
         signOut(auth);
         alert.info("Log out successfully");
         navigate("/");
     };
     const [openMenue, setOpenMenue] = useState(false);
-    const [openProfile, setOpenProfile] = useState(false);
+    // const [openProfile, setOpenProfile] = useState(false);
     const mobileMenue = () => {
         setOpenMenue(!openMenue);
     };
-    const showProfile = () => {
-        setOpenProfile(!openProfile);
-    };
+    // const showProfile = () => {
+    //     setOpenProfile(!openProfile);
+    // };
     return (
         <div>
             <nav className="bg-teal-800 text-white border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-800">
@@ -43,13 +45,12 @@ const NavBar = () => {
                         {user?.emailVerified ? (
                             <>
                                 <button
-                                    type="button"
-                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 "
                                     onClick={logout}>
                                     Log Out
                                 </button>
 
-                                <button
+                                {/* <button
                                     type="button"
                                     className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                     id="user-menu-button"
@@ -71,85 +72,74 @@ const NavBar = () => {
                                         alt="user photo"
                                     />
                                 </button>
-
                                 <div
-                                    className={
-                                        openProfile
-                                            ? "z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
-                                            : "hidden  z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 "
-                                    }
-                                    id="dropdown"
-                                    // style={{
-                                    //     position: "absolute",
-                                    //     inset: "auto auto 0px 0px",
-                                    //     margin: "0px",
-
-                                    //     transform:
-                                    //         "translate3d( 1054.4px, 970.4px, 0px)",
-                                    // }}
-                                    data-popper-reference-hidden=""
-                                    data-popper-escaped=""
-                                    data-popper-placement="top">
+                                    className="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                                    id="dropdown">
                                     <div className="py-3 px-4">
                                         <span className="block text-sm text-gray-900 dark:text-white">
-                                            {user.displayName}
+                                            Bonnie Green
                                         </span>
                                         <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-                                            {user.email}
+                                            name@flowbite.com
                                         </span>
                                     </div>
                                     <ul
                                         className="py-1"
                                         aria-labelledby="dropdown">
                                         <li>
-                                            <Link
-                                                to="#"
+                                            <a
+                                                href="#"
                                                 className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                 Dashboard
-                                            </Link>
+                                            </a>
                                         </li>
                                         <li>
-                                            <Link
-                                                to="#"
+                                            <a
+                                                href="#"
                                                 className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                 Settings
-                                            </Link>
+                                            </a>
                                         </li>
                                         <li>
-                                            <Link
-                                                to="#"
+                                            <a
+                                                href="#"
                                                 className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                 Earnings
-                                            </Link>
+                                            </a>
                                         </li>
                                         <li>
-                                            <Link
-                                                to="#"
+                                            <a
+                                                href="#"
                                                 className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                 Sign out
-                                            </Link>
+                                            </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </>
                         ) : (
                             <div>
-                                <button
-                                    type="button"
-                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                                    onClick={() => {
-                                        navigate("/login");
-                                    }}>
-                                    Login
-                                </button>
-                                <button
-                                    type="button"
-                                    class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                                    onClick={() => {
-                                        navigate("/signup");
-                                    }}>
-                                    Sign Up
-                                </button>
+                                {location.pathname == "/signup" && (
+                                    <button
+                                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 "
+                                        onClick={() => {
+                                            navigate("/login");
+                                        }}>
+                                        Login
+                                    </button>
+                                )}
+                                {location.pathname == "/login" ||
+                                location.pathname == "/reset" ? (
+                                    <button
+                                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 "
+                                        onClick={() => {
+                                            navigate("/signup");
+                                        }}>
+                                        Sign Up
+                                    </button>
+                                ) : (
+                                    <></>
+                                )}
                             </div>
                         )}
 
